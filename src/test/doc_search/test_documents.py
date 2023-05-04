@@ -19,6 +19,3 @@ class TestDocuments(TestCase):
         doc = Document(sent1 + ' ' + sent2)
         sentences = doc.split_sentences()
         assert sentences == [sent1, sent2]
-        
-if __name__ == '__main__':
-    pytest.main(['--capture=no'])

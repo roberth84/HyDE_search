@@ -1,7 +1,4 @@
-from .documents import DocumentCollection, Document
-
 import os
-import torch
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer, util

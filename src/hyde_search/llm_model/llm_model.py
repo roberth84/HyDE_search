@@ -18,7 +18,6 @@ class LLM_Model():
     def get_response(self, question):
         if question not in self.cache.keys():
 
-            
             prompt = f"""I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"Unknown\".\n\nQ: {question}\nA:
         """
             response_text = ''

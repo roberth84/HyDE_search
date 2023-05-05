@@ -1,5 +1,4 @@
 from unittest import TestCase
-from doc_search.documents import DocumentCollection, Document
 from doc_search.embeddings import EmbeddingGenerator, VectorDatabase
 
 

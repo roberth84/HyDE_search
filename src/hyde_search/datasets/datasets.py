@@ -27,7 +27,7 @@ def get_sentences():
         for url in urls:
             res = requests.get(url)
             # extract to dataframe
-            data = pd.read_csv(StringIO(res.text), sep='\t', header=None, error_bad_lines=False)
+            data = pd.read_csv(StringIO(res.text), sep='\t', header=None, on_bad_lines='skip')
             # add to columns 1 and 2 to sentences list
             sentences.extend(data[1].tolist())
             sentences.extend(data[2].tolist())

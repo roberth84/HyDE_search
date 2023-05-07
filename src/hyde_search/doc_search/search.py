@@ -1,15 +1,17 @@
 import requests
 
+from doc_search.embeddings import VectorDatabase
+
 
 class DocumentSearch:
-    def __init__(self, query, database):
+    def __init__(self, query: str, vecdb: VectorDatabase):
         self.query = query
-        self.database = database
+        self.vecdb = vecdb
 
     def search(self, k=5):
-        query_embedding = self.database.embed_query(self.query)
-        distances, indices = self.database.index.search(query_embedding, k)
-        top_k_docs = [self.database.documents[i] for i in indices[0]]
+        query_embedding = self.vecdb._embed_sentence(self.query)
+        distances, indices = self.vecdb.index.search(query_embedding, k)
+        top_k_docs = [self.vecdb.documents[i] for i in indices[0]]
         summaries = self.summarize_context(top_k_docs)
         return summaries
 

@@ -1,0 +1,6 @@
+*.pkl
+openai_key.txt
+setup.sh
+dataset-sts-sentences.txt
+.venv/
+../__pycache__/

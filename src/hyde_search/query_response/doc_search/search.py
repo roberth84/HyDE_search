@@ -1,6 +1,6 @@
 import requests
 
-from doc_search.vector_database import VectorDatabase
+from query_response.doc_search.vector_database import VectorDatabase
 
 
 class DocumentSearch:

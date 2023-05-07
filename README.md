@@ -16,3 +16,10 @@ The doc_search subpackage (src/hyde_search/query_response/doc_search) is used to
 sentence embeddings for sentences, to build the vector database using the embeddings, and 
 to find matching sentences. The llm_model subpackage (src/hyde_search/query_response/llm_model) 
 is used to pass prompts to the LLM and get a response.
+
+To use do the following:
+1. Build a list of sentences. You can add a dataset to datasets/datasets.py and use this to 
+get sentences.
+2. Pass the list of sentences to the VectorDatabase constructor.
+3. Pass the VectorDatabase instance to the DocumentSearchEngine constructor.
+4. Use DocumentSearchEngine.response_using_sentences method to get the responses. 

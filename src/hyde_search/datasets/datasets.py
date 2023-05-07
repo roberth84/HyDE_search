@@ -3,17 +3,23 @@ import pandas as pd
 import os
 from io import StringIO
 import pickle
+from typing import List
 
 
-def get_sentences():
-    
-    if os.path.isfile('sentences.pkl'):
-        with open("sentences.pkl", "rb") as f:
-            sentences = pickle.load(f)
-    else:
-        
+def get_sentences(dataset: str = 'dataset-sts') -> List[str]:
+    """
+    Retrieves sentences for predefined datasets
+
+    :param: dataset: The name of the desired dataset.
+    :return: list of sentences
+    :rtype: List[str]
+    :raises Exception: if the input dataset is unknown
+    """
+
+    if dataset == 'dataset-sts':
+        pickle_file = "dataset-sts-sentences.pkl"
         urls = [
-            'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/sick2014/SICK_train.txt', 
+            'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/sick2014/SICK_train.txt',
             'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2012/MSRpar.train.tsv',
             'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2012/MSRpar.test.tsv',
             'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2012/OnWN.test.tsv',
@@ -22,7 +28,13 @@ def get_sentences():
             'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2014/images.test.tsv',
             'https://raw.githubusercontent.com/brmson/dataset-sts/master/data/sts/semeval-sts/2015/images.test.tsv'
         ]
+    else:
+        raise ValueError("Unknown dataset!")
 
+    if os.path.isfile(pickle_file):
+        with open(pickle_file, "rb") as f:
+            sentences = pickle.load(f)
+    else:
         sentences = []
         for url in urls:
             res = requests.get(url)
@@ -37,10 +49,10 @@ def get_sentences():
             sentence.replace('\n', '') for sentence in list(set(sentences)) if type(sentence) is str
         ]
 
-        with open('sentences.txt', 'w') as f:
+        with open(pickle_file.replace('pkl', 'txt'), 'w') as f:
             f.write('\n'.join(sentences))
 
-        with open('sentences.pkl', 'wb') as f:
+        with open(pickle_file, 'wb') as f:
             pickle.dump(sentences, f)
 
     return sentences

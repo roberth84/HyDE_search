@@ -1,6 +1,6 @@
 import requests
 
-from doc_search.embeddings import VectorDatabase
+from doc_search.vector_database import VectorDatabase
 
 
 class DocumentSearch:

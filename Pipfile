@@ -21,6 +21,7 @@ pandas = "*"
 openai = "*"
 streamlit = "*"
 mock = "*"
+jupyterlab = "*"
 
 [dev-packages]
 

@@ -12,7 +12,10 @@ class EmbeddingGenerator:
     Generates sentence embeddings using sentence-transformers
     """
     def __init__(self, sentences: List[str], embedding_type='multi-qa-MiniLM-L6-cos-v1'):
-
+        """
+        :param: sentences: The sentences to use for the vector database
+        :param: embedding_type: The embedding type, must be a sentence-transformers embedding
+        """
         self.model = SentenceTransformer(embedding_type)
         self.sentences = sentences       
         self.pickle_file = 'embeddings.pkl'
@@ -36,9 +39,10 @@ class EmbeddingGenerator:
             with open(self.pickle_file, "wb") as f:
                 pickle.dump((self.sentences, self.embeddings), f)
                 
-    def _get_embeddings(self):
+    def _get_embeddings(self) -> np.ndarray:
         """
         Internal method to embed self.sentences
+        :return: A numpy array of embeddings with shape (nsentences, embedding_length)
         """
         embeddings = []
         print('Calculating sentence embeddings')

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from query_response.doc_search.search import DocumentSearchEngine
+from query_response.doc_search.search_engine import DocumentSearchEngine
 from query_response.doc_search.vector_database import VectorDatabase
 
 

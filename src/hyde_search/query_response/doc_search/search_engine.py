@@ -23,7 +23,7 @@ class DocumentSearchEngine:
         :return: The answer from the LLM
         """
 
-        query_embedding = self.vecdb._embed_sentence(query)
+        query_embedding = self.vecdb.eg.embed_sentence(query)
         distances, indices = self.vecdb.index.search(query_embedding, k)
         top_k_sents = [self.vecdb.sentences[i] for i in indices[0]]
         prompt = self._create_prompt(query, top_k_sents)

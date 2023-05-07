@@ -17,4 +17,6 @@ class TestEmbeddingGenerator(TestCase):
     def test_embed_sentence(self):
         eg = self.get_example_embedding_generator()
         embedding = eg.embed_sentence("This is an example sentence.")
-        embedding
+        assert embedding.shape == (1, 384)
+        assert embedding[0][0] == 0.051501602
+        assert embedding[0][37] == 0.079380006

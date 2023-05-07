@@ -1,9 +1,9 @@
 from unittest import TestCase
-from query_response.doc_search import DocumentSearch
-from query_response.doc_search import VectorDatabase
+from query_response.doc_search.search import DocumentSearchEngine
+from query_response.doc_search.vector_database import VectorDatabase
 
 
-class TestDocumentSearch(TestCase):
+class TestDocumentSearchEngine(TestCase):
 
     def test_search(self):
         query = 'What did the cat do?'
@@ -15,6 +15,6 @@ class TestDocumentSearch(TestCase):
             'The flowers bloomed in the warm sunshine.'
         ]
         vecdb = VectorDatabase(sentences)
-        ds = DocumentSearch(query, vecdb)
-        response = ds.search(k=2)
-        response
+        ds = DocumentSearchEngine(vecdb)
+        response = ds.response_using_sentences(query, k=2)
+        assert response == "The cat jumped off the couch and ran to the window."

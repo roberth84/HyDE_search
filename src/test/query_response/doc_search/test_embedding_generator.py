@@ -1,5 +1,6 @@
 from unittest import TestCase
-from query_response.doc_search import EmbeddingGenerator, VectorDatabase
+from query_response.doc_search.embedding_generator import EmbeddingGenerator
+from query_response.doc_search.vector_database import VectorDatabase
 
 
 class TestEmbeddingGenerator(TestCase):

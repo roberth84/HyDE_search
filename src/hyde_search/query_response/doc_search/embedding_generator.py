@@ -31,12 +31,15 @@ class EmbeddingGenerator:
         if repickle:
             # get embeddings
             print("getting sentence embeddings")
-            self.embeddings = self.get_embeddings()
+            self.embeddings = self._get_embeddings()
             print("creating embeddings pickle")
             with open(self.pickle_file, "wb") as f:
                 pickle.dump((self.sentences, self.embeddings), f)
                 
-    def get_embeddings(self):
+    def _get_embeddings(self):
+        """
+        Internal method to embed self.sentences
+        """
         embeddings = []
         print('Calculating sentence embeddings')
         for sentence in tqdm(self.sentences):
@@ -45,6 +48,13 @@ class EmbeddingGenerator:
         return np.array(embeddings)
     
     def embed_sentence(self, sentence: str) -> np.ndarray:
+        """
+        Method that takes a sentence and returns the embedding.
+
+        :param: sentence: The sentence to embed
+        :return: The embedding as a numpy array
+        """
+
         vector = self.model.encode(sentence)
         np_vector = np.array([vector])
         return np_vector

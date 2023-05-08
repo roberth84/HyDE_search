@@ -21,7 +21,7 @@ class LLM_Model():
 
         prompt = f"""I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"Unknown\".\n\nQ: {question}\nA:"""
         response_text = ''
-        while response_text is '':
+        while response_text == '':
             response_text = self.get_response(prompt)
         return response_text
 

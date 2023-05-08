@@ -22,4 +22,15 @@ To use do the following:
 get sentences.
 2. Pass the list of sentences to the VectorDatabase constructor.
 3. Pass the VectorDatabase instance to the DocumentSearchEngine constructor.
-4. Use DocumentSearchEngine.response_using_sentences method to get the responses. 
+4. Use DocumentSearchEngine.response_using_sentences method to get the responses.
+
+You can run using the default sentences using either of the following:
+
+> python src/hyde_search/query_response
+
+or
+
+> streamlit run src/streamlit/search.py
+
+Note that with streamlit, you can set the number of matches in the url as in the following example:
+http://35.211.53.157:8501/?n=32

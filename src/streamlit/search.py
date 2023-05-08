@@ -24,6 +24,7 @@ hide_st_style = """
 
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+
 def get_document_search_engine():
     sentences = get_sentences()
     vecdb = VectorDatabase(sentences=sentences)
@@ -31,13 +32,20 @@ def get_document_search_engine():
     return search_engine
 
 
-search_text = st.text_input('Hyde Search', value='What happened in Syria?')
-
-
 search_engine = get_document_search_engine()
-search_response = search_engine.response_using_sentences(query=search_text, k=20)
 
-df = pd.DataFrame.from_dict(search_response)
+search_text = st.text_input('HyDE Search', value='What happened in Syria?')
 
+if search_text in ['random', 'Random']:
+    search_response = {'response': '',
+                       'distances': [None]*20,
+                       'sentences': search_engine.get_random_sentences(num_samples=20)}
+else:
+    search_response = search_engine.response_using_sentences(query=search_text, k=10)
+
+df = pd.DataFrame.from_dict({key: search_response[key] for key in ['distances', 'sentences']})
+st.write(f"{search_response['response']}")
+
+st.table(df)
 
 

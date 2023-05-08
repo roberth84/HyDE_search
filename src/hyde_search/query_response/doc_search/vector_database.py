@@ -23,25 +23,19 @@ class VectorDatabase:
 
         repickle = True
         if os.path.isfile(self.pickle_file):
-            print("Evaluating pickle for faiss sentences")
             with open(self.pickle_file, "rb") as f:
                 sentences, serialized_index = pickle.load(f)
                 if self.sentences == sentences:
-                    print("sentences in faiss pickle match provided sentences, using pickled index")
-                    self.index = faiss.deserialize_index(serialized_index) 
+                    self.index = faiss.deserialize_index(serialized_index)
                     repickle = False
-                else:
-                    print("sentences in faiss pickle don't match provided sentences")
         if repickle:
             
             self.index = faiss.IndexFlatL2(vector_dimension)
             embedding_length = embeddings[0].shape[0]
             
-            print("Indexing sentences for faiss")
             for embedding in tqdm(embeddings):
                 self.index.add(embedding.reshape((1, embedding_length)))
 
-            print("creating new pickle file for faiss sentences and index")
             chunk = faiss.serialize_index(self.index)
             with open(self.pickle_file, "wb") as f:
                 pickle.dump((self.sentences, chunk), f)

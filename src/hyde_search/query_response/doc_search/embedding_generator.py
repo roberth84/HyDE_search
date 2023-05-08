@@ -22,15 +22,11 @@ class EmbeddingGenerator:
         
         repickle = True
         if os.path.isfile(self.pickle_file):
-            print("Evaluating pickle for sentence embeddings")
             with open(self.pickle_file, "rb") as f:
                 sentences, embeddings = pickle.load(f)
                 if self.sentences == sentences:
-                    print("Sentences in embeddings pickle match provided sentences, using pickled embeddings")
                     self.embeddings = embeddings
                     repickle = False
-                else:
-                    print("Sentences in embeddings pickle don't match provided sentences")
         if repickle:
             # get embeddings
             print("getting sentence embeddings")

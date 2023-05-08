@@ -36,7 +36,7 @@ search_engine = get_document_search_engine()
 search_text = st.text_input('HyDE Search', value='What happened in Syria?')
 
 params = st.experimental_get_query_params()
-num_matches = params.get('n', [])
+num_matches = params.get('n', [10])
 if num_matches:
     num_matches = int(num_matches[0])
 
